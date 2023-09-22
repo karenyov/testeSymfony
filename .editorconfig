@@ -1,0 +1,11 @@
+# Top-most EditorConfig file
+root = true
+
+# Use spaces for indentation
+[*]
+indent_style = space
+indent_size = 4
+
+# PHP files
+[*.php]
+indent_size = 4
