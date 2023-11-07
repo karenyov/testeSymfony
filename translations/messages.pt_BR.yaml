@@ -1,0 +1,12 @@
+# status 4xx
+client_error_message_400: "Solicitação inválida."
+client_error_message_401: "Acesso não autorizado."
+client_error_message_403: "Permissão negada."
+client_error_message_404: "Recurso não encontrado."
+client_error_message_405: "Método não permitido."
+client_error_message_406: "Formato não aceito."
+client_error_message_408: "Tempo limite excedido."
+client_error_message_429: "Limite de solicitações excedido."
+
+# status 5xx
+server_error_message: "Ocorreu um erro interno no servidor."

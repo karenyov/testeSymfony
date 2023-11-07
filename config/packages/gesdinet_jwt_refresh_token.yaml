@@ -1,0 +1,6 @@
+gesdinet_jwt_refresh_token:
+    ttl: 86400 # 60 * 60 * 24
+    firewall: api
+    token_parameter_name: refresh_token
+    single_use: true
+    refresh_token_class: App\Core\Entity\RefreshToken

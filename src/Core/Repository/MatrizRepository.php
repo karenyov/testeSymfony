@@ -2,14 +2,13 @@
 
 namespace App\Core\Repository;
 
-use App\Core\Entity\Matriz;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Core\Entity\Matriz as Entity;
 use Doctrine\Persistence\ManagerRegistry;
 
-class MatrizRepository extends ServiceEntityRepository
+class MatrizRepository extends BaseRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Matriz::class);
+        parent::__construct($registry, Entity::class);
     }
 }

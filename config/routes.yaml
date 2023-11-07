@@ -11,3 +11,6 @@ supply_routes:
         namespace: App\Supply\Controller
     type: attribute
     prefix: /api/supply
+
+api_login_check:
+    path: /api/login_check

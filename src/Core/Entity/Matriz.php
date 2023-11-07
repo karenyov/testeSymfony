@@ -3,7 +3,9 @@
 namespace App\Core\Entity;
 
 use App\Core\Repository\MatrizRepository;
-use App\Core\Entity\Empresa;
+
+use Ramsey\Uuid\Doctrine\UuidGenerator;
+use Ramsey\Uuid\UuidInterface;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -14,9 +16,10 @@ use Doctrine\Common\Collections\Collection;
 class Matriz
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: "uuid", unique: true)]
+    #[ORM\GeneratedValue(strategy: "CUSTOM")]
+    #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
+    private UuidInterface $id;
 
     #[ORM\Column(length: 255)]
     private ?string $nome = null;
@@ -34,7 +37,7 @@ class Matriz
         return $this->empresas;
     }
 
-    public function getId(): ?int
+    public function getId(): UuidInterface
     {
         return $this->id;
     }
@@ -44,7 +47,7 @@ class Matriz
         return $this->nome;
     }
 
-    public function setNome(string $nome): static
+    public function setNome(string $nome): self
     {
         $this->nome = $nome;
 

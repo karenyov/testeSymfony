@@ -4,6 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    ENCRYPTION_SQL: "%env(ENCRYPTION_SQL)%"
 
 services:
     # default configuration for services in *this* file
@@ -23,6 +24,53 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Core\EventSubscriber\EntitySubscriber:
+        arguments:
+            $entityManager: "@doctrine.orm.entity_manager"
+        tags:
+            - { name: "doctrine.event_subscriber" }
+
     App\Core\EventListener\ExceptionListener:
         tags:
             - { name: "kernel.event_listener", event: "kernel.exception" }
+        arguments:
+            $environment: "%kernel.environment%"
+
+    App\Core\EventListener\DoctrineForeignKeysListener:
+        tags:
+            - { name: doctrine.event_listener, event: postGenerateSchema }
+
+    App\Core\EventListener\AccessControlListener:
+        tags:
+            - {
+                  name: kernel.event_listener,
+                  event: kernel.controller,
+                  method: onKernelController,
+              }
+
+    App\Core\EventListener\AccessLogListener:
+        tags:
+            - {
+                  name: kernel.event_listener,
+                  event: kernel.request,
+                  method: onKernelRequest,
+              }
+
+    App\Core\EventListener\JWTAuthenticationListener:
+        tags:
+            - {
+                  name: kernel.event_listener,
+                  event: lexik_jwt_authentication.on_authentication_success,
+                  method: onAuthenticationSuccess,
+              }
+
+    acme_api.event.jwt_created_listener:
+        class: App\Core\EventListener\JWTCreatedListener
+        arguments: ["@request_stack"]
+        tags:
+            - {
+                  name: kernel.event_listener,
+                  event: lexik_jwt_authentication.on_jwt_created,
+                  method: onJWTCreated,
+              }

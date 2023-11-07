@@ -6,6 +6,9 @@ use App\Core\Repository\EmpresaRepository;
 use App\Core\Entity\Matriz;
 use App\Supply\Entity\Pedido;
 
+use Ramsey\Uuid\Doctrine\UuidGenerator;
+use Ramsey\Uuid\UuidInterface;
+
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -15,9 +18,10 @@ use Doctrine\Common\Collections\Collection;
 class Empresa
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: "uuid", unique: true)]
+    #[ORM\GeneratedValue(strategy: "CUSTOM")]
+    #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
+    private UuidInterface $id;
 
     #[ORM\Column(length: 255, nullable: false)]
     private ?string $nome = null;
@@ -42,7 +46,7 @@ class Empresa
         return $this->pedidos;
     }
 
-    public function getId(): ?int
+    public function getId(): UuidInterface
     {
         return $this->id;
     }
@@ -52,7 +56,7 @@ class Empresa
         return $this->nome;
     }
 
-    public function setNome(string $nome): static
+    public function setNome(string $nome): self
     {
         $this->nome = $nome;
 
@@ -64,7 +68,7 @@ class Empresa
         return $this->apelido;
     }
 
-    public function setApelido(string $apelido): static
+    public function setApelido(string $apelido): self
     {
         $this->apelido = $apelido;
 

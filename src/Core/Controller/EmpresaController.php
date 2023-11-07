@@ -2,34 +2,37 @@
 
 namespace App\Core\Controller;
 
-use App\Core\Entity\Empresa;
+use App\Core\Service\EmpresaService;
+use App\Core\Request\Empresa\EmpresaCreateRequest;
+use App\Core\Request\Empresa\EmpresaUpdateRequest;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-#[Route('/empresa', name: 'app_')]
+#[Route('/empresa', name: 'empresa_')]
 class EmpresaController extends AbstractController
 {
+    public function __construct(
+        private readonly EmpresaService  $empresaService
+    ) {
+    }
+
     #[Route('/', name: 'app_empresa', methods: ['get'])]
-    public function index(EntityManagerInterface $entityManager): JsonResponse
+    public function index(): JsonResponse
     {
-        $empresaRepository = $entityManager->getRepository(Empresa::class);
-        $empresas = $empresaRepository->findAll();
+        return new JsonResponse($this->empresaService->findBy(), JsonResponse::HTTP_OK);
+    }
 
-        $data = [];
-        foreach ($empresas as $empresa) {
-            $data[] = [
-                'id' => $empresa->getId(),
-                'nome' => $empresa->getNome(),
-                'apelido' => $empresa->getApelido(),
-                'matriz' => $empresa->getMatriz()->getNome()
-            ];
-        }
+    #[Route(name: 'app_empresa_create', methods: ['post'])]
+    public function create(EmpresaCreateRequest $request): JsonResponse
+    {
+        return new JsonResponse($this->empresaService->create($request), JsonResponse::HTTP_CREATED);
+    }
 
-        return new JsonResponse([
-            'data' => $data
-        ]);
+    #[Route('/{id}', name: 'app_empresa_update', methods: ['put'])]
+    public function update(EmpresaUpdateRequest $request): JsonResponse
+    {
+        return new JsonResponse($this->empresaService->update($request), JsonResponse::HTTP_OK);
     }
 }

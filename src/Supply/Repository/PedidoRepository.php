@@ -2,47 +2,34 @@
 
 namespace App\Supply\Repository;
 
-use App\Supply\Entity\Pedido;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Supply\Entity\Pedido as Entity;
+use App\Core\Repository\BaseRepository;
+
+use Ramsey\Uuid\UuidInterface;
+
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @extends ServiceEntityRepository<Pedido>
- *
- * @method Pedido|null find($id, $lockMode = null, $lockVersion = null)
- * @method Pedido|null findOneBy(array $criteria, array $orderBy = null)
- * @method Pedido[]    findAll()
- * @method Pedido[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
-class PedidoRepository extends ServiceEntityRepository
+class PedidoRepository extends BaseRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Pedido::class);
+        parent::__construct($registry, Entity::class);
     }
 
-    //    /**
-    //     * @return Pedido[] Returns an array of Pedido objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('p.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function isUnique(int $num, int $year, ?UuidInterface $id = null): ?bool
+    {
+        $query =  $this->createQueryBuilder('p')
+            ->select('p')
+            ->where('p.numPedido = :numPedido')
+            ->andWhere('p.anoPedido = :anoPedido')
+            ->setParameter('numPedido', $num)
+            ->setParameter('anoPedido', $year);
 
-    //    public function findOneBySomeField($value): ?Pedido
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        if ($id !== null) {
+            $query
+                ->andWhere('p.id <> :id')
+                ->setParameter('id', $id);
+        }
+        return $query->getQuery()->getOneOrNullResult() === null;
+    }
 }

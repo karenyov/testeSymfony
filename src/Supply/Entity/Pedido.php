@@ -4,6 +4,10 @@ namespace App\Supply\Entity;
 
 use App\Core\Entity\Empresa;
 use App\Supply\Repository\PedidoRepository;
+
+use Ramsey\Uuid\Doctrine\UuidGenerator;
+use Ramsey\Uuid\UuidInterface;
+
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PedidoRepository::class)]
@@ -11,9 +15,10 @@ use Doctrine\ORM\Mapping as ORM;
 class Pedido
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: "uuid", unique: true)]
+    #[ORM\GeneratedValue(strategy: "CUSTOM")]
+    #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
+    private UuidInterface $id;
 
     #[ORM\Column(name: "num_pedido", nullable: false)]
     private ?int $numPedido = null;
@@ -22,10 +27,10 @@ class Pedido
     private ?int $anoPedido = null;
 
     #[ORM\ManyToOne(targetEntity: Empresa::class, inversedBy: 'pedidos')]
-    #[ORM\JoinColumn(name: "empresa_id", referencedColumnName: "id")]
+    #[ORM\JoinColumn(name: "empresa_id", referencedColumnName: "id", nullable: false)]
     private Empresa $empresa;
 
-    public function getId(): ?int
+    public function getId(): ?UuidInterface
     {
         return $this->id;
     }
@@ -35,7 +40,7 @@ class Pedido
         return $this->numPedido;
     }
 
-    public function setNumPedido(int $numPedido): static
+    public function setNumPedido(int $numPedido): self
     {
         $this->numPedido = $numPedido;
 
@@ -47,7 +52,7 @@ class Pedido
         return $this->anoPedido;
     }
 
-    public function setAnoPedido(int $anoPedido): static
+    public function setAnoPedido(int $anoPedido): self
     {
         $this->anoPedido = $anoPedido;
 

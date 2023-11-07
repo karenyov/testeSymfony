@@ -3,51 +3,81 @@ doctrine:
         connections:
             default:
                 url: "%env(resolve:DATABASE_URL)%"
+                logging: "%kernel.debug%"
+                charset: utf8
+                default_table_options:
+                    charset: utf8
+                    collate: utf8_bin
             compras:
                 url: "%env(resolve:DATABASE_COMPRAS_URL)%"
-
-            profiling_collect_backtrace: "%kernel.debug%"
+                logging: "%kernel.debug%"
+                charset: utf8
+                default_table_options:
+                    charset: utf8
+                    collate: utf8_bin
+        #     profiling_collect_backtrace: "%kernel.debug%"
         default_connection: default
 
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)
         #server_version: '15'
+        types:
+            operacao: 'App\Core\Doctrine\DBAL\Types\OperacaoType'
+            httpMethod: 'App\Core\Doctrine\DBAL\Types\HttpMethodType'
+            uuid: Ramsey\Uuid\Doctrine\UuidType
     orm:
-        auto_generate_proxy_classes: true
-        enable_lazy_ghost_objects: true
+        default_entity_manager: default
+        #auto_generate_proxy_classes: true
+        #enable_lazy_ghost_objects: true
         # report_fields_where_declared: true
         # validate_xml_mapping: true
-        # naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        # \\naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         # auto_mapping: true
 
         entity_managers:
             default:
+                dql:
+                    string_functions:
+                        AES_DECRYPT_FROM_BASE64: App\Core\Doctrine\DQL\AesDecryptFromBase64
                 connection: default
                 mappings:
-                    AppCore:
+                    App:
                         is_bundle: false
                         dir: "%kernel.project_dir%/src/Core/Entity"
                         prefix: 'App\Core\Entity'
-                        alias: AppCore
-                    AppSupply:
+                        alias: App
+                    AppLog:
+                        is_bundle: false
+                        dir: "%kernel.project_dir%/src/Core/Entity/Log"
+                        prefix: 'App\Core\Entity\Log'
+                        alias: AppLog
+                    Supply:
                         is_bundle: false
                         dir: "%kernel.project_dir%/src/Supply/Entity"
                         prefix: 'App\Supply\Entity'
-                        alias: AppSupply
+                        alias: Supply
 
             compras:
+                dql:
+                    string_functions:
+                        AES_DECRYPT_FROM_BASE64: App\Core\Doctrine\DQL\AesDecryptFromBase64
                 connection: compras
                 mappings:
-                    AppCore:
+                    App:
                         is_bundle: false
                         dir: "%kernel.project_dir%/src/Core/Entity"
                         prefix: 'App\Core\Entity'
-                        alias: AppCore
-                    AppSupply:
+                        alias: App
+                    Supply:
                         is_bundle: false
                         dir: "%kernel.project_dir%/src/Supply/Entity"
                         prefix: 'App\Supply\Entity'
-                        alias: AppSupply
+                        alias: Supply
+                    SupplyLog:
+                        is_bundle: false
+                        dir: "%kernel.project_dir%/src/Supply/Entity/Log"
+                        prefix: 'App\Supply\Entity\Log'
+                        alias: SupplyLog
 
 when@test:
     doctrine:
