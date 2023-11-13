@@ -1,4 +1,4 @@
-# iLogix
+# Base Symfony
 
 ## Install without Docker
 
