@@ -1,0 +1,669 @@
+{
+	"info": {
+		"_postman_id": "8eb5215a-420c-40ae-8a07-cb7347ff1a9e",
+		"name": "iLogix Alpha",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3777456"
+	},
+	"item": [
+		{
+			"name": "Core",
+			"item": [
+				{
+					"name": "Empresa",
+					"item": [
+						{
+							"name": "LIST ALL Empresas",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{BASE_URL}}/empresa",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"empresa"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST Empresa",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"matriz_id\" : 1,\r\n    \"nome\" : \"Empresa 1\",\r\n    \"apelido\": \"E. 1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/empresa",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"empresa"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE Empresa",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"matriz_id\" : 1,\r\n    \"nome\" : \"Empresa 4 u\",\r\n    \"apelido\": \"T. Empresa 4\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/empresa/4",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"empresa",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Funcionalidades da Entidade Empresa."
+				},
+				{
+					"name": "Matriz",
+					"item": [
+						{
+							"name": "POST Matriz",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\": \"Matriz teste\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/matriz",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"matriz"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE Matriz",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/matriz/52621886-8c53-4137-88ff-4b800ea2bf61",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"matriz",
+										"52621886-8c53-4137-88ff-4b800ea2bf61"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE Matriz",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n    \"nome\": \"Matriz 2 Update\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/matriz/52621886-8c53-4137-88ff-4b800ea2bf61",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"matriz",
+										"52621886-8c53-4137-88ff-4b800ea2bf61"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "LIST ALL Matriz",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{BASE_URL}}/matriz",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"matriz"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Funcionalidades da Entidade Matriz."
+				},
+				{
+					"name": "Usuario",
+					"item": [
+						{
+							"name": "LIST ALL Usuario",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/usuario",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"usuario"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST Usuario",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\" : \"Teste 2\",\r\n    \"email\" : \"teste1@email.com\",\r\n    \"grupo_id\": \"16d99e5a-ebc3-4d9e-a3e8-b903f6dd93d2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/usuario",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"usuario"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE Usuario",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\" : \"Maria U\",\r\n    \"grupo_id\": \"b48bcc50-447e-462b-871f-f19e6c1edbd5\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/usuario/93cfe0eb-032e-48fc-ad82-868c14509360",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"usuario",
+										"93cfe0eb-032e-48fc-ad82-868c14509360"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "LIST Usuario",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/usuario/93cfe0eb-032e-48fc-ad82-868c14509360",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"usuario",
+										"93cfe0eb-032e-48fc-ad82-868c14509360"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Funcionalidades da Entidade Usuario."
+				},
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "login_check",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\" : \"sistema@email.com\",\r\n    \"senha\": \"brasil\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/login_check",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"login_check"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Refresh Token",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"refresh_token\" : \"87eada95ca8b37957278c4d37ca41a4c52579700faa654d700679929a5a32742c69bc27d5364616161c41f550e8dacfc3d0afb695cfe3de56423aac8c38e7863\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/token/refresh",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"token",
+										"refresh"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Autenticação."
+				}
+			],
+			"description": "Módulo Core."
+		},
+		{
+			"name": "Supply",
+			"item": [
+				{
+					"name": "Pedido",
+					"item": [
+						{
+							"name": "LIST Pedido",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/supply/pedido",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"supply",
+										"pedido"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST Pedido",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"num_pedido\" : 1,\r\n    \"ano_pedido\" : 2023,\r\n    \"empresa_id\": \"eaa460c8-53ba-48d3-be68-a9d36191707b\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/supply/pedido",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"supply",
+										"pedido"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Pedido",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/supply/pedido/1",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"supply",
+										"pedido",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE Pedido",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/supply/pedido/1",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"supply",
+										"pedido",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE Pedido",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"num_pedido\" : 2,\r\n    \"ano_pedido\" : 2023,\r\n    \"empresa_id\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/supply/pedido/1",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"supply",
+										"pedido",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Funcionalidades da Entidade Pedido."
+				}
+			],
+			"description": "Módulo Supply."
+		}
+	]
+}
